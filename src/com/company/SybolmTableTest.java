@@ -15,5 +15,6 @@ public class SybolmTableTest {
         System.out.println("删除元素"+sybomlTable.delElement(2));
         System.out.println("元素个数"+sybomlTable.getNumber());
 
+
     }
 }
