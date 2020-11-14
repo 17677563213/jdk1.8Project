@@ -1,6 +1,9 @@
 package com.company;
 
+import javax.management.Query;
+import javax.swing.tree.TreeNode;
 import java.util.Comparator;
+import java.util.Queue;
 
 public class BaniryTree<Key extends Comparable<Key>, Value> {
     //    内部类:
@@ -201,6 +204,183 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
 
 
     }
+
+    /**
+     * 获取二叉树中最大key
+     */
+    public Key getMaxKey(){
+       return getMax(root).key;
+
+    }
+
+    public Node getMaxKey(Node node){
+        if(node.r!=null){
+            return getMax(node.r);
+
+        }else{
+            return node;
+
+        }
+
+
+    };
+
+
+    /**
+     * 查询最小key的值:
+     *
+     * 思路:
+     *  1.最小值,一直往左获取
+     *  2.获取key最大值
+     *
+     */
+    public Key getMinKey(){
+
+        return getMinKey(root).key;
+    }
+
+    public Node getMinKey(Node node){
+        if(node!=null&&node.l!=null){
+           return  getMinKey(node.l);
+
+        }else{
+            return node;
+
+
+        }
+
+    }
+
+    /**
+     * 思路:
+     *  1.采用递归操作
+     *  2.判断是否为空
+     *  3.添加元素到队列中
+     *  4.之后再判断左边
+     *  5.判断右边
+     * @return
+     */
+    public CustomerQueue<Key> preErgodi(){
+        CustomerQueue<Key> keyCustomerQueue = new CustomerQueue<>();
+        preErgodi(root, keyCustomerQueue);
+
+        return keyCustomerQueue;
+
+    }
+    public void preErgodi(Node treeNode, CustomerQueue<Key> keys){
+        if(treeNode==null){
+            return;
+
+        }
+        Key key = treeNode.key;
+        keys.enqueue(key);
+        if(treeNode.l!=null){
+            preErgodi(treeNode.l, keys);
+
+
+        }
+        if(treeNode.r!=null){
+            preErgodi(treeNode.r,keys);
+
+        }
+
+    }
+
+    /**
+     * 需求:
+     *      对二叉树进行中序遍历:
+     *  1.
+     * @return
+     */
+    public CustomerQueue<String> midErgodic(){
+        CustomerQueue<String> keys = new CustomerQueue<>();
+        midErgodic(root, keys);
+        return keys;
+
+    }
+    public void midErgodic(Node nodeTree,CustomerQueue<String> keys){
+//        判断是否为空
+        if(nodeTree==null){
+            return ;
+
+        }
+
+//        判断左边
+        if(nodeTree.l!=null){
+            midErgodic(nodeTree.l,keys);
+        }
+//        中间添加元素
+        keys.enqueue((String) nodeTree.key);
+//        判断右边
+        if(nodeTree.r!=null){
+            midErgodic(nodeTree.r,keys);
+        }
+
+
+    }
+
+
+    public CustomerQueue afterErgodic(){
+        CustomerQueue<String> keys = new CustomerQueue<>();
+        afterErgodic(root,keys);
+
+        return keys;
+    }
+    public void afterErgodic(Node node,CustomerQueue keys){
+        if(node==null){
+            return ;
+        }
+        if(node.l!=null){
+            afterErgodic(node.l,keys);
+        }
+        if(node.r!=null){
+            afterErgodic(node.r,keys);
+        }
+        keys.enqueue(node.key);
+
+
+
+
+    }
+
+    /**
+     * 层次遍历:从上往下,左往右
+     *
+     * 思路:
+     *  1.需要采用两个队列,一个用来存储节点,一个用来存储key
+     *  2.
+      */
+    public CustomerQueue<String> layerErgodic(){
+        CustomerQueue<String> keys = new CustomerQueue<>();
+        CustomerQueue<Node> nodes = new CustomerQueue<>();
+        nodes.enqueue(root);
+        while (!nodes.isEmpty()){
+            //队列弹出元素
+            Node node = nodes.deQueue();
+            //将弹出元素放到另一个队列中
+            keys.enqueue((String) node.key);
+            //左边判断
+            if(node.l!=null){
+                nodes.enqueue(node.l);
+            }
+            if(node.r!=null){
+                nodes.enqueue(node.r);
+            }
+
+        }
+
+
+
+        return keys;
+
+    }
+
+
+
+
+
+
+
 
 
 }

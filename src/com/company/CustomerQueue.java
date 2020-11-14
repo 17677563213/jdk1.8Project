@@ -31,9 +31,9 @@ public class CustomerQueue<T> implements Iterable{
             }
 
             @Override
-            public Object next() {
+            public T next() {
                  temporaryNode = temporaryNode.next;
-                return temporaryNode.item;
+                return (T) temporaryNode.item;
             }
         };
     }
