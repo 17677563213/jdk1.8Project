@@ -4,6 +4,7 @@ import javax.management.Query;
 import javax.swing.tree.TreeNode;
 import java.util.Comparator;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BaniryTree<Key extends Comparable<Key>, Value> {
     //    内部类:
@@ -374,6 +375,64 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
         return keys;
 
     }
+
+
+    public int maxDepth(Node node){
+        /**
+         * 判断是否为空
+         * 2.初始化,左右两边的深度
+         * 3.比较左右两边获取最大值
+         * 问题:
+         *  1.没调用都会初始化一次
+         */
+
+        return 0;
+    }
+
+
+    /**
+     * 需求:
+     *  判断一个纯括号的字符串,是否是完全匹配,括号类型,括号闭合顺序
+     *  别人思想:采用栈,先进后出性质
+     */
+
+    public boolean   isValid(String str){
+        Stack<Character> stack = new Stack<>();
+        for (char e : str.toCharArray()) {
+            if(e=='('){
+                stack.push(')');
+            }else if(e=='['){
+                stack.push(']');
+            }else if(e=='{'){
+                stack.push('}');
+            }else if(stack.isEmpty()||stack.pop()!=e) {
+                return false;
+
+            }
+        }
+        return stack.isEmpty();
+        /**
+         * 思路: 模型分析,寻找特点
+         */
+        /**
+         * 三种情况:
+         * 如果是已经为空,或者是不相等,就可以直接终止循环
+         * 2.
+         */
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
 
 
 
