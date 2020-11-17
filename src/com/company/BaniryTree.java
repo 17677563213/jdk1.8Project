@@ -1,10 +1,10 @@
 package com.company;
 
+import org.junit.Test;
+
 import javax.management.Query;
 import javax.swing.tree.TreeNode;
-import java.util.Comparator;
-import java.util.Queue;
-import java.util.Stack;
+import java.util.*;
 
 public class BaniryTree<Key extends Comparable<Key>, Value> {
     //    内部类:
@@ -22,8 +22,8 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
         }
 
 
-
     }
+
     //    成员变量:
     private Node root;
     private int number;
@@ -69,7 +69,7 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
 
     //    删除元素
     public void delete(Key key) {
-        root= delete(root, key);
+        root = delete(root, key);
 
 
     }
@@ -140,8 +140,9 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
         return n;
 
     }
-//    获取元素个数
-    public int getElement(){
+
+    //    获取元素个数
+    public int getElement() {
 
         return number;
     }
@@ -150,29 +151,31 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
 
     /**
      * 思路:
-     *  1.需要两个方法进行重载:
-     *  2.采用思想:递归调用
-     *  3.判断元素是否为空,如果为空返回null,如果不为空,进行key的大小比较
-     *  如果大于,获取右边的节点
-     *  如果小于获取左边节点
-     *  如果key等于,返回value的数据
+     * 1.需要两个方法进行重载:
+     * 2.采用思想:递归调用
+     * 3.判断元素是否为空,如果为空返回null,如果不为空,进行key的大小比较
+     * 如果大于,获取右边的节点
+     * 如果小于获取左边节点
+     * 如果key等于,返回value的数据
+     *
      * @param key
      * @return
      */
-    public Value getValueByKey(Key key){
+    public Value getValueByKey(Key key) {
 
         return getValueByKey(this.root, key);
     }
-    public Value getValueByKey(Node node ,Key key){
-        if(node ==null){
+
+    public Value getValueByKey(Node node, Key key) {
+        if (node == null) {
             return null;
         }
         int i = key.compareTo(node.key);
-        if(i>0){
-            return getValueByKey(node.r,key);
-        }else if(i<0){
-            return getValueByKey(node.l,key);
-        }else{
+        if (i > 0) {
+            return getValueByKey(node.r, key);
+        } else if (i < 0) {
+            return getValueByKey(node.l, key);
+        } else {
             Value value = node.value;
             return value;
         }
@@ -180,28 +183,29 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
 
     }
 
-//    获取二叉树中最小key
-    public Key getMin(){
-    return getMin(root).key;
+    //    获取二叉树中最小key
+    public Key getMin() {
+        return getMin(root).key;
     }
-    public Node getMin(Node node){
-        if(node.l!=null){
+
+    public Node getMin(Node node) {
+        if (node.l != null) {
             return getMin(node.l);
-        }else{
+        } else {
             return node;
         }
     }
 
-    public Key getMax(){
+    public Key getMax() {
         return getMax(this.root).key;
     }
-    public Node getMax(Node node){
-        if(node.r!=null){
+
+    public Node getMax(Node node) {
+        if (node.r != null) {
             return getMax(node.r);
-        }else{
+        } else {
             return node;
         }
-
 
 
     }
@@ -209,42 +213,43 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
     /**
      * 获取二叉树中最大key
      */
-    public Key getMaxKey(){
-       return getMax(root).key;
+    public Key getMaxKey() {
+        return getMax(root).key;
 
     }
 
-    public Node getMaxKey(Node node){
-        if(node.r!=null){
+    public Node getMaxKey(Node node) {
+        if (node.r != null) {
             return getMax(node.r);
 
-        }else{
+        } else {
             return node;
 
         }
 
 
-    };
+    }
+
+    ;
 
 
     /**
      * 查询最小key的值:
-     *
+     * <p>
      * 思路:
-     *  1.最小值,一直往左获取
-     *  2.获取key最大值
-     *
+     * 1.最小值,一直往左获取
+     * 2.获取key最大值
      */
-    public Key getMinKey(){
+    public Key getMinKey() {
 
         return getMinKey(root).key;
     }
 
-    public Node getMinKey(Node node){
-        if(node!=null&&node.l!=null){
-           return  getMinKey(node.l);
+    public Node getMinKey(Node node) {
+        if (node != null && node.l != null) {
+            return getMinKey(node.l);
 
-        }else{
+        } else {
             return node;
 
 
@@ -254,34 +259,36 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
 
     /**
      * 思路:
-     *  1.采用递归操作
-     *  2.判断是否为空
-     *  3.添加元素到队列中
-     *  4.之后再判断左边
-     *  5.判断右边
+     * 1.采用递归操作
+     * 2.判断是否为空
+     * 3.添加元素到队列中
+     * 4.之后再判断左边
+     * 5.判断右边
+     *
      * @return
      */
-    public CustomerQueue<Key> preErgodi(){
+    public CustomerQueue<Key> preErgodi() {
         CustomerQueue<Key> keyCustomerQueue = new CustomerQueue<>();
         preErgodi(root, keyCustomerQueue);
 
         return keyCustomerQueue;
 
     }
-    public void preErgodi(Node treeNode, CustomerQueue<Key> keys){
-        if(treeNode==null){
+
+    public void preErgodi(Node treeNode, CustomerQueue<Key> keys) {
+        if (treeNode == null) {
             return;
 
         }
         Key key = treeNode.key;
         keys.enqueue(key);
-        if(treeNode.l!=null){
+        if (treeNode.l != null) {
             preErgodi(treeNode.l, keys);
 
 
         }
-        if(treeNode.r!=null){
-            preErgodi(treeNode.r,keys);
+        if (treeNode.r != null) {
+            preErgodi(treeNode.r, keys);
 
         }
 
@@ -289,123 +296,148 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
 
     /**
      * 需求:
-     *      对二叉树进行中序遍历:
-     *  1.
+     * 对二叉树进行中序遍历:
+     * 1.
+     *
      * @return
      */
-    public CustomerQueue<String> midErgodic(){
+    public CustomerQueue<String> midErgodic() {
         CustomerQueue<String> keys = new CustomerQueue<>();
         midErgodic(root, keys);
         return keys;
 
     }
-    public void midErgodic(Node nodeTree,CustomerQueue<String> keys){
+
+    public void midErgodic(Node nodeTree, CustomerQueue<String> keys) {
 //        判断是否为空
-        if(nodeTree==null){
-            return ;
+        if (nodeTree == null) {
+            return;
 
         }
 
 //        判断左边
-        if(nodeTree.l!=null){
-            midErgodic(nodeTree.l,keys);
+        if (nodeTree.l != null) {
+            midErgodic(nodeTree.l, keys);
         }
 //        中间添加元素
         keys.enqueue((String) nodeTree.key);
 //        判断右边
-        if(nodeTree.r!=null){
-            midErgodic(nodeTree.r,keys);
+        if (nodeTree.r != null) {
+            midErgodic(nodeTree.r, keys);
         }
 
 
     }
 
 
-    public CustomerQueue afterErgodic(){
+    public CustomerQueue afterErgodic() {
         CustomerQueue<String> keys = new CustomerQueue<>();
-        afterErgodic(root,keys);
+        afterErgodic(root, keys);
 
         return keys;
     }
-    public void afterErgodic(Node node,CustomerQueue keys){
-        if(node==null){
-            return ;
+
+    public void afterErgodic(Node node, CustomerQueue keys) {
+        if (node == null) {
+            return;
         }
-        if(node.l!=null){
-            afterErgodic(node.l,keys);
+        if (node.l != null) {
+            afterErgodic(node.l, keys);
         }
-        if(node.r!=null){
-            afterErgodic(node.r,keys);
+        if (node.r != null) {
+            afterErgodic(node.r, keys);
         }
         keys.enqueue(node.key);
-
-
 
 
     }
 
     /**
      * 层次遍历:从上往下,左往右
-     *
+     * <p>
      * 思路:
-     *  1.需要采用两个队列,一个用来存储节点,一个用来存储key
-     *  2.
-      */
-    public CustomerQueue<String> layerErgodic(){
+     * 1.需要采用两个队列,一个用来存储节点,一个用来存储key
+     * 2.
+     */
+    public CustomerQueue<String> layerErgodic() {
         CustomerQueue<String> keys = new CustomerQueue<>();
         CustomerQueue<Node> nodes = new CustomerQueue<>();
         nodes.enqueue(root);
-        while (!nodes.isEmpty()){
+        while (!nodes.isEmpty()) {
             //队列弹出元素
             Node node = nodes.deQueue();
             //将弹出元素放到另一个队列中
             keys.enqueue((String) node.key);
             //左边判断
-            if(node.l!=null){
+            if (node.l != null) {
                 nodes.enqueue(node.l);
             }
-            if(node.r!=null){
+            if (node.r != null) {
                 nodes.enqueue(node.r);
             }
 
         }
 
 
-
         return keys;
 
     }
 
+    public int maxDepth() {
+        return maxDepth(root);
+    }
 
-    public int maxDepth(Node node){
+
+    public int maxDepth(Node node) {
         /**
          * 判断是否为空
          * 2.初始化,左右两边的深度
          * 3.比较左右两边获取最大值
          * 问题:
          *  1.没调用都会初始化一次
+         *
+         *
+         *
          */
+        if (node == null) {
+            return 0;
+        }
+        int rDept = 0;
+        int lDept = 0;
+        int maxDept = 0;
+        if (node.l != null) {
+            lDept = maxDepth(node.l);
+        }
+        if (node.r != null) {
+            rDept = maxDepth(node.r);
+        }
+        maxDept = (lDept > rDept ? lDept + 1 : rDept + 1);
+        return maxDept;
 
-        return 0;
+
     }
 
 
     /**
      * 需求:
-     *  判断一个纯括号的字符串,是否是完全匹配,括号类型,括号闭合顺序
-     *  别人思想:采用栈,先进后出性质
+     * 判断一个纯括号的字符串,是否是完全匹配,括号类型,括号闭合顺序
+     * 别人思想:采用栈,先进后出性质
      */
 
-    public boolean   isValid(String str){
+    public boolean isValid(String str) {
+        /**
+         * 闭合:
+         *  1.
+         */
         Stack<Character> stack = new Stack<>();
         for (char e : str.toCharArray()) {
-            if(e=='('){
+            if (e == '(') {
                 stack.push(')');
-            }else if(e=='['){
+            } else if (e == '[') {
                 stack.push(']');
-            }else if(e=='{'){
+            } else if (e == '{') {
                 stack.push('}');
-            }else if(stack.isEmpty()||stack.pop()!=e) {
+            } else if (stack.isEmpty() || stack.pop() != e) {
                 return false;
 
             }
@@ -421,21 +453,87 @@ public class BaniryTree<Key extends Comparable<Key>, Value> {
          */
 
 
-
-
-
-
-
-
-
     }
 
 
+    public int[] intersection(int[] nums1, int[] nums2) {
+        List<Integer> nmsl = new ArrayList<>();
+        /**
+         * 两个需求:
+         * 1.
+         */
+        for (int i = 0; i < nums1.length; ++i) {
+            nmsl.add(nums1[i]);
+        }
+        Set<Integer> res = new HashSet<>();
+        for (int i = 0; i < nums2.length; ++i) {
+            if (nmsl.contains(nums2[i])) {
+                res.add(nums2[i]);
+            } ;
+        }
+        int[] ans = new int[res.size()];
+        int count = 0;
+        for (Integer i : res) {
+            ans[count++] = i;
+        }
+        return ans;
+    }
+
+    /**
+     * 利用hashSet的特性
+     */
+    @Test
+    public void method01(){
+        HashSet<String> strings = new HashSet<>();
+        for (int i = 0; i <100 ; i++) {
+            strings.add("java");
+        }
+        /**
+         * 结论:
+         *  1.hashset不能够存放重复元素
+         *  2.集合可以调用是否包含的方法containt();
+         *  3.再将这个集合通过创建对象的形式放到新的数组中
+         *  4.
+         */
+        boolean java = strings.remove("java");
+        System.out.println(java);
+
+    }
+
+    public int[] intersect(int[] nums1, int[] nums2) {
+        /**
+         * 思路采用双指针
+         * 2.排序
+         */
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int f1=0;
+        int f2=0;
+        List<Integer> lists = new ArrayList<>();
+        while(f1<nums1.length&&f2<nums2.length){
+            if(nums1[f1]>nums2[f2]){
+                f2++;
+            }else if(nums1[f1]<nums2[f2]){
+                f1++;
+
+            }else{
+                lists.add(nums1[f1]);
+                f1++;
+                f2++;
 
 
+            }
+
+        }
+        int[] ints = new int[lists.size()];
+
+        for (int i = 0; i < lists.size(); i++) {
+            ints[i]=lists.get(i);
+        }
 
 
-
+        return ints;
+    }
 
 
 

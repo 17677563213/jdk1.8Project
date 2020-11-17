@@ -16,10 +16,13 @@ public class BaniryTreeTest02 {
         bt.put("F", "6");
         bt.put("H", "8");
         bt.put("C", "3");
-        CustomerQueue<String> queue = bt.layerErgodic();
-        for (Object key : queue) {
-            System.out.println("结果"+key);
-        }
+        int i = bt.maxDepth();
+        System.out.println("树高"+i);
+//        CustomerQueue<String> queue = bt.layerErgodic();
+//        for (Object key : queue) {
+//            System.out.println("结果"+key);
+//        }
+
 //        巧妙!
 //        判断左右两边是否存在元素,如果存在元素压入栈,弹出
 //        采用队列的原因:先进先出的性质
