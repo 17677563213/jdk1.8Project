@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Iterator;
+
 /**
  * 手写一个线性表添加,删除,获取元素个数,
  * 添加有两种方式,一种是直接添加在元素的尾部,添加到指定位置
@@ -7,7 +9,7 @@ package com.company;
  *
  * @param <T>
  */
-public class SequenceList02<T> {
+public class SequenceList02<T> implements  Iterable<T> {
     private T [] item;
     private int n;
 
@@ -82,5 +84,19 @@ public class SequenceList02<T> {
     }
 
 
+    @Override
+    public Iterator iterator() {
+        return new Iterator() {
+            int number;
+            @Override
+            public boolean hasNext() {
+                return number<n;
+            }
 
+            @Override
+            public Object next() {
+                return item[number++];
+            }
+        };
+    }
 }
