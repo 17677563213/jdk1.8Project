@@ -2,7 +2,10 @@ package com.company;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DeptFirstSearchTest {
 
@@ -50,6 +53,71 @@ public class DeptFirstSearchTest {
         list.peek();
         list.poll();
         list.push(1);
+    }
+
+    @Test
+    public void method03(){
+        String str="bcabc";
+        String[] split = str.split("");
+        List<String> collect = Arrays.stream(split).distinct().collect(Collectors.toList());
+        StringBuffer stringBuffer = new StringBuffer();
+
+        for (String s : collect) {
+            stringBuffer.append(s);
+        }
+        System.out.println(stringBuffer.toString());
+    }
+
+
+    @Test
+    public void method04(){
+        int [] number1={1,2,3};
+        int [] number2={3,2,1};
+        System.out.println(validateStackSequences(number1, number2));
+
+    }
+
+    public boolean validateStackSequences(int[] pushed, int[] popped) {
+        if(pushed.length!=popped.length){
+            return false;
+
+        }
+        StringBuffer stringBuffer1 = new StringBuffer();
+        for (int i = 0; i <pushed.length ; i++) {
+            stringBuffer1.append(pushed[i]);
+
+        }
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = popped.length-1; i >=0; i--) {
+            stringBuffer.append(popped[i]);
+        }
+        Object o = new Object();
+        Integer integer = new Integer(1);
+        integer= (Integer) o;
+
+        return stringBuffer1.toString().equals(stringBuffer.toString());
+
+
+
+
+
+    }
+
+    @Test
+    public void method005(){
+        LinkedList<Integer> list = new LinkedList<>();
+        list.addLast(1);
+        list.addLast(2);
+        list.addLast(3);
+        for (Integer integer : list) {
+            System.out.println(integer);
+        }
+
+
+        Integer [] ints ={1,3,5};
+        Arrays.sort(ints);
+
+
     }
 
 
