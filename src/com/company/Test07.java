@@ -5,19 +5,29 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Test07 {
 
 
 
+
+
     @Test
-     public void method04(){
-        Map map = new HashMap();
-        map.put("name","韦新阳");
-        map.put("address", "地址");
-        boolean add = new ArrayList<>().add(map.values());
-        System.out.println(add);
+    public void method05(){
+        int [] [] str ={{1,2},{3,6} ,{9,10}};
+        System.out.println(str.length);
+
+
+
+    }
+
+    @Test
+    public void method06(){
+        List list =new ArrayList();
+        list.add(4, "java");
+        System.out.println(list.get(4));
 
 
     }
